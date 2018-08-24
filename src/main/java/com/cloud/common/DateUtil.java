@@ -488,8 +488,4 @@ public class DateUtil {
         cal.set(Calendar.MILLISECOND, 59);
         return cal.getTime();
     }
-
-    public static void main(String[] args){
-        System.out.println(getMonthEnd());
-    }
 }
