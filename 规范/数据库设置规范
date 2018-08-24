@@ -1,0 +1,12 @@
+1.数据库和数据库表的编码方式都为utf8mb4
+2.表设计需要写表注释
+3.确定表的类型是MyISAM还是InnoDB
+4.索引名称规范：IDX_字段名
+5.设计表不使用外键约束,但是在子表连接的字段需要加索引
+6.状态字段使用tinyint,长度为4,同时后端代码需要设置相应的枚举类。
+7.最常使用的数据库字段类型：bigint、int、tinyint、varchar、decimal、datetime
+8.表设计必须的三个字段：
+    8.1)表创建时间：create_time  datetime 0 0 Y
+    8.2)逻辑删除字段：status tinyint 4 0 Y
+    8.3)记录更新时间：status_time datetime 0 0 Y
+9.复杂查询可使用视图,尽量不要使用函数、存储过程、事件等
