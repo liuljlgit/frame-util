@@ -196,11 +196,300 @@ public class DateUtil {
     }
 
     /**
+     * 得到月份
+     * @param date
+     * @return
+     */
+    public static Integer getMonth(Date date) {
+        return Integer.valueOf(formatDate(date,"MM"));
+    }
+
+    /**
+     * 得到月份
+     * @return
+     */
+    public static Integer getMonth() {
+        Date date = new Date();
+        return Integer.valueOf(formatDate(date,"MM"));
+    }
+
+    /**
+     * 得到日期
+     * @param date
+     * @return
+     */
+    public static Integer getDay(Date date) {
+        return Integer.valueOf(formatDate(date,"dd"));
+    }
+
+    /**
+     * 得到月份
+     * @return
+     */
+    public static Integer getDay() {
+        Date date = new Date();
+        return Integer.valueOf(formatDate(date,"dd"));
+    }
+
+    /**
+     * 得到小时
+     * @param date
+     * @return
+     */
+    public static Integer getHour(Date date) {
+        return Integer.valueOf(formatDate(date,"HH"));
+    }
+
+    /**
+     * 得到小时
+     * @return
+     */
+    public static Integer getHour() {
+        Date date = new Date();
+        return Integer.valueOf(formatDate(date,"HH"));
+    }
+
+    /**
+     * 得到分钟
+     * @param date
+     * @return
+     */
+    public static Integer getMinute(Date date) {
+        return Integer.valueOf(formatDate(date,"mm"));
+    }
+
+    /**
+     * 得到分钟
+     * @return
+     */
+    public static Integer getMinute() {
+        Date date = new Date();
+        return Integer.valueOf(formatDate(date,"mm"));
+    }
+
+    /**
+     * 得到秒钟
+     * @param date
+     * @return
+     */
+    public static Integer getSecond(Date date) {
+        return Integer.valueOf(formatDate(date,"ss"));
+    }
+
+    /**
+     * 得到秒钟
+     * @return
+     */
+    public static Integer getSecond() {
+        Date date = new Date();
+        return Integer.valueOf(formatDate(date,"ss"));
+    }
+
+    /**
      * 根据日期得到今天是星期几
      * @param date
      * @return
      */
     public static String getWeek(Date date) {
         return formatDate(date,WEEKEND);
+    }
+
+    /**
+     * 得到一天的开始 yyyy-MM-dd 00:00:00
+     * @param date
+     * @return
+     */
+    public static Date getDayStart(Date date) {
+        if (null == date) {
+            return null;
+        } else {
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(date);
+            ca.set(Calendar.DECEMBER, 0);
+            ca.set(Calendar.MINUTE, 0);
+            ca.set(Calendar.SECOND, 0);
+            ca.set(Calendar.MILLISECOND, 0);
+            return ca.getTime();
+        }
+    }
+
+    /**
+     * 得到今天的开始 yyyy-MM-dd 00:00:00
+     * @return
+     */
+    public static Date getDayStart() {
+        Date date = new Date();
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(date);
+        ca.set(Calendar.DECEMBER, 0);
+        ca.set(Calendar.MINUTE, 0);
+        ca.set(Calendar.SECOND, 0);
+        ca.set(Calendar.MILLISECOND, 0);
+        return ca.getTime();
+    }
+
+    /**
+     * 得到一天的结束 yyyy-MM-dd 23:59:59
+     * @param date
+     * @return
+     */
+    public static Date getDayEnd(Date date) {
+        if (null == date) {
+            return null;
+        } else {
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(date);
+            ca.set(Calendar.DECEMBER, 23);
+            ca.set(Calendar.MINUTE, 59);
+            ca.set(Calendar.SECOND, 59);
+            return ca.getTime();
+        }
+    }
+
+    /**
+     * 得到今天的结束 yyyy-MM-dd 23:59:59
+     * @return
+     */
+    public static Date getDayEnd() {
+        Date date = new Date();
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(date);
+        ca.set(Calendar.DECEMBER, 23);
+        ca.set(Calendar.MINUTE, 59);
+        ca.set(Calendar.SECOND, 59);
+        return ca.getTime();
+    }
+
+    /**
+     * 得到这个月开始的第一天 yyyy-MM-dd 00:00:00
+     * @return
+     */
+    public static Date getMonthStart() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(1), cal.get(2), cal.get(5), 0, 0, 0);
+        cal.set(5, cal.getActualMinimum(5));
+        return cal.getTime();
+    }
+
+    /**
+     * 得到指定月开始的第一天 yyyy-MM-dd 00:00:00
+     * @return
+     */
+    public static Date getMonthStart(Date time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(time);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 0, 0, 0);
+        cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
+
+    /**
+     * 得到指定月开始的最后一天 yyyy-MM-dd 23:59:59
+     * @return
+     */
+    public static Date getMonthEnd() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 0, 0, 0);
+        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+        cal.set(Calendar.DECEMBER, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 59);
+        return cal.getTime();
+    }
+
+    /**
+     * 得到这个月开始的最后一天 yyyy-MM-dd 23:59:59
+     * @return
+     */
+    public static Date getMonthEnd(Date time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(time);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 0, 0, 0);
+        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+        cal.set(Calendar.DECEMBER, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 59);
+        return cal.getTime();
+    }
+
+    /**
+     * 得到一年的开始那一天 yyyy-MM-dd 00:00:00
+     * @param date
+     * @return
+     */
+    public static Date getYearStart(Date date) {
+        if (null == date) {
+            return null;
+        } else {
+            Calendar ca = Calendar.getInstance();
+            ca.setTime(date);
+            ca.set(Calendar.MONTH, 0);
+            ca.set(Calendar.DATE, 1);
+            ca.set(Calendar.DECEMBER, 0);
+            ca.set(Calendar.MINUTE, 0);
+            ca.set(Calendar.SECOND, 0);
+            ca.set(Calendar.MILLISECOND, 0);
+            return ca.getTime();
+        }
+    }
+
+    /**
+     * 得到今年的开始那一天 yyyy-MM-dd 00:00:00
+     * @return
+     */
+    public static Date getYearStart() {
+        Date date = new Date();
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(date);
+        ca.set(Calendar.MONTH, 0);
+        ca.set(Calendar.DATE, 1);
+        ca.set(Calendar.DECEMBER, 0);
+        ca.set(Calendar.MINUTE, 0);
+        ca.set(Calendar.SECOND, 0);
+        ca.set(Calendar.MILLISECOND, 0);
+        return ca.getTime();
+    }
+
+    /**
+     * 得到一年的结束那一天 yyyy-MM-dd 23:59:59
+     * @param date
+     * @return
+     */
+    public static Date getYearEnd(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 0, 0, 0);
+        cal.set(Calendar.MONTH, cal.getActualMaximum(Calendar.MONTH));
+        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+        cal.set(Calendar.DECEMBER, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 59);
+        return cal.getTime();
+    }
+
+    /**
+     * 得到今年的结束那一天 yyyy-MM-dd 23:59:59
+     * @return
+     */
+    public static Date getYearEnd() {
+        Date date  = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 0, 0, 0);
+        cal.set(Calendar.MONTH, cal.getActualMaximum(Calendar.MONTH));
+        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+        cal.set(Calendar.DECEMBER, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 59);
+        return cal.getTime();
+    }
+
+    public static void main(String[] args){
+        System.out.println(getMonthEnd());
     }
 }
