@@ -1,4 +1,4 @@
-package com.cloud.common;
+package com.cloud.common.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

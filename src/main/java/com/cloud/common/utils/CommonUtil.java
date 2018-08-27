@@ -1,4 +1,4 @@
-package com.cloud.common;
+package com.cloud.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;

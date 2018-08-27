@@ -1,4 +1,4 @@
-package com.cloud.common;
+package com.cloud.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.cloud.common;
+package com.cloud.common.utils;
 
 /**
  * 把字符串转换成驼峰式命名法

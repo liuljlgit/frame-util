@@ -1,6 +1,6 @@
 package com.cloud.common.redis;
 
-import com.cloud.common.CommonUtil;
+import com.cloud.common.utils.CommonUtil;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 

@@ -1,6 +1,6 @@
 package com.cloud.common.redis;
 
-import com.cloud.common.CommonUtil;
+import com.cloud.common.utils.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
