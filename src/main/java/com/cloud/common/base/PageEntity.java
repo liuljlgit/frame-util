@@ -2,6 +2,11 @@ package com.cloud.common.base;
 
 public class PageEntity {
     /**
+     * field comment: 是否启用分页
+     */
+    private boolean startUpPage = Boolean.FALSE;
+
+    /**
      * field comment: 当前页
      */
     private Integer page = 1;
@@ -56,5 +61,13 @@ public class PageEntity {
 
     public Integer getIndex() {
         return (page-1)*pageSize;
+    }
+
+    public boolean getStartUpPage() {
+        return startUpPage;
+    }
+
+    public void setStartUpPage(boolean startUpPage) {
+        this.startUpPage = startUpPage;
     }
 }
