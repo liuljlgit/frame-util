@@ -4,7 +4,7 @@ public class PageEntity {
     /**
      * field comment: 是否启用分页
      */
-    private boolean startUpPage = Boolean.FALSE;
+    private boolean usePage = Boolean.FALSE;
 
     /**
      * field comment: 当前页
@@ -59,15 +59,23 @@ public class PageEntity {
         return (total-1)/pageSize+1;
     }
 
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
+    }
+
     public Integer getIndex() {
         return (page-1)*pageSize;
     }
 
-    public boolean getStartUpPage() {
-        return startUpPage;
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
-    public void setStartUpPage(boolean startUpPage) {
-        this.startUpPage = startUpPage;
+    public boolean getUsePage() {
+        return usePage;
+    }
+
+    public void setUsePage(boolean usePage) {
+        this.usePage = usePage;
     }
 }
