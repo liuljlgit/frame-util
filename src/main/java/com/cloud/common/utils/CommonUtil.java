@@ -208,4 +208,29 @@ public class CommonUtil {
         } catch (Exception e) {
         }
     }
+
+    /**
+     * 对数组对象进行深度的复制
+     * @param src
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> deepCopy(List<T> src) {
+        try {
+            ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(byteOut);
+            out.writeObject(src);
+
+            ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
+            ObjectInputStream in = new ObjectInputStream(byteIn);
+            @SuppressWarnings("unchecked")
+            List<T> dest = (List<T>) in.readObject();
+            return dest;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
