@@ -69,15 +69,19 @@ public class CommonUtil {
             try {
                 e.setAccessible(true);
                 Object obj = e.get(t);
+                /*过滤掉为空的值*/
                 if (Objects.isNull(obj)) {
                     return false;
                 }
-                if (obj instanceof Boolean && obj == Boolean.FALSE) {
+                /*过滤掉布尔值为false的值，除去usePage*/
+                if (obj instanceof Boolean && obj == Boolean.FALSE && !e.getName().equals("usePage")) {
                     return false;
                 }
+                /*过滤掉PROP_*/
                 if(e.getName().startsWith("PROP_")){
                     return false;
                 }
+                /*过滤掉TABLE_*/
                 if(e.getName().startsWith("TABLE_")){
                     return false;
                 }
@@ -88,24 +92,16 @@ public class CommonUtil {
         }).collect(Collectors.toList());
         /*把属性使用fastjson转换成一个list字符串*/
         List<String> list = new ArrayList<>();
-        for(Field f : filterField){
+        for(Field f : filterField)
             try {
                 f.setAccessible(true);
                 Object obj = f.get(t);
-                if(obj instanceof Collection){
-                    Object collect = ((Collection) obj).stream().sorted().collect(Collectors.toList());
-                    String name = f.getName();
-                    String str = name+":"+ JSON.toJSONString(collect);
-                    list.add(str);
-                    continue;
-                }
                 String name = f.getName();
-                String str = name+":"+JSON.toJSONString(obj);
+                String str = name + ":" + JSON.toJSONString(obj);
                 list.add(str);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
         if(isEncrypt){
             return SecureUtil.md5X16Str(String.join("_",list),"utf-8");
         }else{
