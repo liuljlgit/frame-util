@@ -62,7 +62,9 @@ public class CommonUtil {
      * @return
      */
     public static <T> String createRedisKey(T t,boolean isEncrypt){
+        /*得到所有的属性*/
         List<Field> allField = getAllField(t.getClass(), null);
+        /*过滤掉不能作为key值的field*/
         List<Field> filterField = allField.stream().filter((Field e) -> {
             try {
                 e.setAccessible(true);
@@ -76,11 +78,15 @@ public class CommonUtil {
                 if(e.getName().startsWith("PROP_")){
                     return false;
                 }
+                if(e.getName().startsWith("TABLE_")){
+                    return false;
+                }
             } catch (IllegalAccessException e1) {
                 e1.printStackTrace();
             }
             return true;
         }).collect(Collectors.toList());
+        /*把属性使用fastjson转换成一个list字符串*/
         List<String> list = new ArrayList<>();
         for(Field f : filterField){
             try {
