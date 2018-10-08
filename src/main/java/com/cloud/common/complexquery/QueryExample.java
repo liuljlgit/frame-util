@@ -28,13 +28,6 @@ public class QueryExample {
         return criteria;
     }
 
-    public Criteria createCriteria(){
-        Criteria criteria = new Criteria();
-        criteria.setOpt("");
-        addCriteria(criteria);
-        return criteria;
-    }
-
     private void addCriteria(Criteria criteria){
         if(CollectionUtils.isEmpty(criterias)){
             criterias = new ArrayList<>();
