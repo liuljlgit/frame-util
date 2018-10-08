@@ -84,6 +84,7 @@ public class Criteria {
         criterion.setValue1(value1);
         criterion.setValue2(value2);
         criterion.setSecondValue(true);
+        criterions.add(criterion);
     }
 
     public List<Criterion> getCriterions() {
