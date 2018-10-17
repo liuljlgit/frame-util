@@ -56,7 +56,10 @@ public class PageEntity {
     }
 
     public Integer getTotalPage() {
-        return (total-1)/pageSize+1;
+        if(usePage){
+            return (total-1)/pageSize+1;
+        }
+        return totalPage;
     }
 
     public void setTotalPage(Integer totalPage) {
