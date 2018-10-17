@@ -1,4 +1,4 @@
-package com.cloud.common.base;
+package com.cloud.common.simplequery;
 
 import java.io.Serializable;
 
