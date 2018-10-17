@@ -177,6 +177,7 @@ public class CommonUtil {
             return clazz.cast(obj);
         } catch (NullPointerException ne) {
         } catch (Exception e) {
+            e.printStackTrace();
             logger.debug("反序列化失败", e);
         } finally {
             closeInpputStream(bis);

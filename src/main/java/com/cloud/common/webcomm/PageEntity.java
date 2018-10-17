@@ -2,7 +2,7 @@ package com.cloud.common.webcomm;
 
 import java.util.Objects;
 
-public class PageEntity {
+public class PageEntity{
 
     protected static final Integer PAGE_NO_USE = -1 ;
     protected static final Integer DEFAULT_SIZE = 1000 ;
