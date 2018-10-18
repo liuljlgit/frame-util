@@ -165,7 +165,8 @@ public class CommonUtil {
         //基本数据类型判断，否则会报错
         if(clazz.equals(Long.class)){
             try{
-                T l=clazz.cast(Long.parseLong(new String(input)));
+                DataInputStream dataInput = new DataInputStream(new ByteArrayInputStream(input));
+                T l=clazz.cast(dataInput.readLong());
                 return l;
             }catch (Exception ex){
             }
