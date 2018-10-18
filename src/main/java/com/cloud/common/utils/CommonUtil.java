@@ -73,8 +73,8 @@ public class CommonUtil {
                 if (Objects.isNull(obj)) {
                     return false;
                 }
-                /*过滤掉布尔值为false的值，除去usePage*/
-                if (obj instanceof Boolean && obj == Boolean.FALSE && !e.getName().equals("usePage")) {
+                /*过滤掉布尔值为false的值*/
+                if (obj instanceof Boolean && obj == Boolean.FALSE) {
                     return false;
                 }
                 /*过滤掉PROP_*/
@@ -89,7 +89,7 @@ public class CommonUtil {
                 e1.printStackTrace();
             }
             return true;
-        }).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(Field::getName)).collect(Collectors.toList());
         /*把属性使用fastjson转换成一个list字符串*/
         List<String> list = new ArrayList<>();
         for(Field f : filterField)
