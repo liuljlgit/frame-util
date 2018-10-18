@@ -61,7 +61,7 @@ public class CommonUtil {
      * @param <T>
      * @return
      */
-    public static <T> String createRedisKey(T t,boolean isEncrypt){
+    public static <T> String createRedisKey(T t,boolean isEncrypt,boolean isCountPage){
         /*得到所有的属性*/
         List<Field> allField = getAllField(t.getClass(), null);
         /*过滤掉不能作为key值的field*/
@@ -84,6 +84,12 @@ public class CommonUtil {
                 /*过滤掉TABLE_*/
                 if(e.getName().startsWith("TABLE_")){
                     return false;
+                }
+                /*如果是统计分页数量,忽略page,pageSize,total,totalPage*/
+                if(isCountPage){
+                    if(e.getName().equals("page") || e.getName().equals("pageSize") || e.getName().equals("total") || e.getName().equals("totalPage")){
+                        return false;
+                    }
                 }
             } catch (IllegalAccessException e1) {
                 e1.printStackTrace();
@@ -165,8 +171,7 @@ public class CommonUtil {
         //基本数据类型判断，否则会报错
         if(clazz.equals(Long.class)){
             try{
-                DataInputStream dataInput = new DataInputStream(new ByteArrayInputStream(input));
-                T l=clazz.cast(dataInput.readLong());
+                T l=clazz.cast(Long.parseLong(new String(input)));
                 return l;
             }catch (Exception ex){
             }
