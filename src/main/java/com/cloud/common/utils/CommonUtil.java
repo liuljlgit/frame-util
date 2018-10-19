@@ -1,6 +1,8 @@
 package com.cloud.common.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -112,6 +114,40 @@ public class CommonUtil {
             return SecureUtil.md5X16Str(String.join("_",list),"utf-8");
         }else{
             return String.join("_",list);
+        }
+    }
+
+    /**
+     * 复杂查询生成加密redis键值
+     * @param obj
+     * @param isEncrypt
+     * @param isCountPage
+     * @return
+     */
+    public static String createExampleRedisKey(JSONObject obj,boolean isEncrypt,boolean isCountPage){
+        JSONArray criterias = obj.getJSONArray("criterias");
+        if(isCountPage){
+            obj.remove("index");
+            obj.remove("pageSize");
+            obj.remove("orderByClause");
+        }
+        for(int i=0;i<criterias.size();i++){
+            JSONObject obj1 = criterias.getJSONObject(i);
+            obj1.remove("valid");
+            JSONArray criterions = obj1.getJSONArray("criterions");
+            for(int j=0;j<criterions.size();j++){
+                JSONObject obj2 = criterions.getJSONObject(j);
+                obj2.remove("listValue");
+                obj2.remove("noValue");
+                obj2.remove("secondValue");
+                obj2.remove("oneValue");
+            }
+        }
+        String res = obj.toJSONString();
+        if(isEncrypt){
+            return SecureUtil.md5X16Str(res,"utf-8");
+        }else{
+            return res;
         }
     }
 
