@@ -47,6 +47,29 @@ public class BaseController {
     }
 
     /**
+     * 得到头信息
+     * @param code
+     * @param errMsg
+     * @return
+     */
+    public static JSONObject getRespHeader(Integer code, String errMsg) {
+        String errorMsg = codeMap.get(code) ;
+        if (StringUtils.isEmpty(errorMsg)) {
+            code = 9999;
+            errorMsg = "未定义的错误";
+        }
+        JSONObject respMsg = new JSONObject();
+        respMsg.put("resultCode", code);
+        if (!StringUtils.isEmpty(errMsg)) {
+            errorMsg = errMsg;
+        }
+        respMsg.put(BUSI_CODE_MESSGE, errorMsg);
+        JSONObject respHeader = new JSONObject() ;
+        respHeader.put(RESP_HEADER, respMsg);
+        return respHeader ;
+    }
+
+    /**
      * 生成响应结果
      * @param resultCode
      * @param respBody
@@ -55,6 +78,21 @@ public class BaseController {
      */
     public static String formatResponseParams(Integer resultCode, JSONObject respBody, String ...args) {
         JSONObject RespHeader = getRespHeader(resultCode, args);
+        if( respBody != null ){
+            RespHeader.put("respBody", respBody);
+        }
+        return RespHeader.toString();
+    }
+
+    /**
+     * 生成响应结果
+     * @param resultCode
+     * @param respBody
+     * @param errMsg
+     * @return
+     */
+    public static String formatResponseParams(Integer resultCode, JSONObject respBody, String errMsg) {
+        JSONObject RespHeader = getRespHeader(resultCode, errMsg);
         if( respBody != null ){
             RespHeader.put("respBody", respBody);
         }
