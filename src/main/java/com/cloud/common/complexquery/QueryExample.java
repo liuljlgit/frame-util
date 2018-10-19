@@ -2,16 +2,17 @@ package com.cloud.common.complexquery;
 
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 复查查询
  */
-public class QueryExample {
+public class QueryExample implements Serializable {
     private String orderByClause;
-    private int index;
-    private int pageSize;
+    private Integer index;
+    private Integer pageSize;
     private List<Criteria> criterias;
 
     public Criteria andCriteria(){
@@ -43,19 +44,19 @@ public class QueryExample {
         this.orderByClause = orderByClause;
     }
 
-    public int getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 
-    public int getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
@@ -66,4 +67,6 @@ public class QueryExample {
     public void setCriterias(List<Criteria> criterias) {
         this.criterias = criterias;
     }
+
+
 }
