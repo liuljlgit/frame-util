@@ -1,12 +1,15 @@
 package com.cloud.common.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 日期操作公共类
@@ -487,5 +490,31 @@ public class DateUtil {
         cal.set(Calendar.SECOND, 59);
         cal.set(Calendar.MILLISECOND, 59);
         return cal.getTime();
+    }
+
+    /**
+     * 按固定大小切分日期
+     * @param startDate
+     * @param endDate
+     * @param days
+     * @return
+     */
+    public static List<JSONObject> splitDate(Date startDate, Date endDate, int days) {
+        List<JSONObject> list = new ArrayList<>();
+        while(true){
+            JSONObject obj = new JSONObject();
+            if(DateUtil.addTime(startDate,0,0,days,0,0,0).after(endDate)){
+                obj.put("startDate",DateUtil.addTime(startDate,0,0,0,0,0,0));
+                obj.put("endDate",DateUtil.addTime(endDate,0,0,0,0,0,0));
+                list.add(obj);
+                break;
+            }else{
+                obj.put("startDate",DateUtil.addTime(startDate,0,0,0,0,0,0));
+                obj.put("endDate",DateUtil.addTime(startDate,0,0,days-1,0,0,0));
+                list.add(obj);
+            }
+            startDate = DateUtil.addTime(startDate,0,0,days,0,0,0);
+        }
+        return list;
     }
 }
