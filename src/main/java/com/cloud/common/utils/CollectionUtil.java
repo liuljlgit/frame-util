@@ -2,6 +2,7 @@ package com.cloud.common.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 集合处理工具类
@@ -53,6 +54,26 @@ public class CollectionUtil {
             result.add(subList);
         }
         return result;
+    }
+
+    /**
+     * 从一个两层的map中得到唯一的值
+     * @param firstKey
+     * @param secondKey
+     * @param dataMaps
+     * @param <K1>
+     * @param <K2>
+     * @param <V>
+     * @return
+     */
+    public static <K1,K2,V> V getTwoKeyOneMapValue(K1 firstKey,K2 secondKey,Map<K1,Map<K2,V>> dataMaps) {
+        if(dataMaps.containsKey(firstKey)){
+            Map<K2, V> k2VMap = dataMaps.get(firstKey);
+            if(k2VMap.containsKey(secondKey)){
+                return k2VMap.get(secondKey);
+            }
+        }
+        return null;
     }
 
 }
