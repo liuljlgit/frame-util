@@ -66,7 +66,7 @@ public class CollectionUtil {
      * @param <V>
      * @return
      */
-    public static <K1,K2,V> V getTwoKeyOneMapValue(K1 firstKey,K2 secondKey,Map<K1,Map<K2,V>> dataMaps) {
+    public static <K1,K2,V> V getTwoKeyMapValue(K1 firstKey,K2 secondKey,Map<K1,Map<K2,V>> dataMaps) {
         if(dataMaps.containsKey(firstKey)){
             Map<K2, V> k2VMap = dataMaps.get(firstKey);
             if(k2VMap.containsKey(secondKey)){
