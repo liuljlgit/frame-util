@@ -57,7 +57,7 @@ public class CollectionUtil {
     }
 
     /**
-     * 从一个两层的map中得到唯一的值
+     * 从一个两层的map中得到value值
      * @param firstKey
      * @param secondKey
      * @param dataMaps
