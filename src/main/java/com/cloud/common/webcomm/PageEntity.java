@@ -1,21 +1,20 @@
 package com.cloud.common.webcomm;
 
+import com.cloud.common.constant.IConst;
+
 import java.util.Objects;
 
 public class PageEntity{
 
-    protected static final Integer PAGE_NO_USE = -1 ;
-    protected static final Integer DEFAULT_SIZE = 1000 ;
-
     /**
      * field comment: 当前页,如果是-1,不启用分页
      */
-    private Integer page = PAGE_NO_USE;
+    private Integer page = IConst.PAGE_NO_USE;
 
     /**
      * field comment: 页面大小
      */
-    private Integer pageSize = DEFAULT_SIZE;
+    private Integer pageSize = IConst.DEFAULT_PAGE_SIZE;
 
     /**
      * field comment: 总数

@@ -1,5 +1,6 @@
 package com.cloud.common.complexquery;
 
+import com.cloud.common.webcomm.PageEntity;
 import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
@@ -9,10 +10,8 @@ import java.util.List;
 /**
  * 复查查询
  */
-public class QueryExample implements Serializable {
+public class QueryExample extends PageEntity implements Serializable {
     private String orderByClause;
-    private Integer index;
-    private Integer pageSize;
     private List<Criteria> criterias;
 
     public Criteria andCriteria(){
@@ -42,22 +41,6 @@ public class QueryExample implements Serializable {
 
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
-    }
-
-    public Integer getIndex() {
-        return index;
-    }
-
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
     }
 
     public List<Criteria> getCriterias() {

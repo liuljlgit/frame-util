@@ -89,7 +89,8 @@ public class CommonUtil {
                 }
                 /*如果是统计分页数量,忽略page,pageSize,total,totalPage*/
                 if(isCountPage){
-                    if(e.getName().equals("page") || e.getName().equals("pageSize") || e.getName().equals("total") || e.getName().equals("totalPage")){
+                    if(e.getName().equals("page") || e.getName().equals("pageSize") || e.getName().equals("total")
+                            || e.getName().equals("totalPage") || e.getName().equals("index")){
                         return false;
                     }
                 }
@@ -127,8 +128,11 @@ public class CommonUtil {
     public static String createExampleRedisKey(JSONObject obj,boolean isEncrypt,boolean isCountPage){
         JSONArray criterias = obj.getJSONArray("criterias");
         if(isCountPage){
-            obj.remove("index");
+            obj.remove("page");
             obj.remove("pageSize");
+            obj.remove("total");
+            obj.remove("totalPage");
+            obj.remove("index");
             obj.remove("orderByClause");
         }
         for(int i=0;i<criterias.size();i++){
