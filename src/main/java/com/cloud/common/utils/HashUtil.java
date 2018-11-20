@@ -21,7 +21,7 @@ public class HashUtil {
         if(key instanceof Integer){
             suffer = String.valueOf((Integer)key % hashTimes);
         }else if(key instanceof Long){
-            suffer = String.valueOf((Integer)key % hashTimes);
+            suffer = String.valueOf((Long)key % hashTimes);
         }else{
             throw new Exception("key的数据类型不支持");
         }
