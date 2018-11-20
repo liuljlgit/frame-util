@@ -16,7 +16,6 @@ public class HashFunction {
      */
     public String hash(String key) {
         String s = null;
-
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
@@ -48,7 +47,6 @@ public class HashFunction {
             str[k++] = hexDigits[b >>> 4 & 0xf];
             // 与0xf（00001111）相与，为低四位的值，然后再hexDigits数组中找到对应的16进制值
             str[k++] = hexDigits[b & 0xf];
-
         }
         String s = new String(str);
         return s;

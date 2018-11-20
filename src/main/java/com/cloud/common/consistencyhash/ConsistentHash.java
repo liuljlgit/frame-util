@@ -6,15 +6,18 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
- * 利用一致性hash，计算得到对象要存放的服务器
+ * 利用一致性hash，计算得到对象要存放的表
+ * hash一致性算法优势:当节点发生增加或者删除时，可以保证尽量少的数据移动。而普通的hash算法在节点发生变动时,数据移动量大
+ * 分表实现想法:我们使用hash一致性算法去计算存储到哪个表，然后建立一个key表(这个key表就一个字段,存储已经存储到数据库中的key值)，当表中的数据发生增加或者删除时，也同时维护key表
+ *            当我们表的数量发生变动时,需要进行数据迁移（hash一致性算法可以保证迁移的数量比较少），那么我们只需要查询key表遍历然后建立表（旧->新的映射），然后定时任务进行数据迁移。
  */
 public class ConsistentHash<T> {
     // 哈希函数类，这个类由自己定义，可以用MD5压缩法
     private final HashFunction hashFunction;
-    // 虚拟节点个数
+    // 虚拟节点个数（一个虚拟节点对应一个或者多个实际节点）
     private final int numberOfReplicas;
     // 建立有序的map
-    private final SortedMap<String, T> circle = new TreeMap<String, T>();
+    private final SortedMap<String, T> circle = new TreeMap<>();
 
     public ConsistentHash(HashFunction hashFunction, int numberOfReplicas,
                           Collection<T> nodes) {
@@ -80,15 +83,14 @@ public class ConsistentHash<T> {
      */
     public static void main(String[] args) {
         // 定义几个服务器的名称，存放到集合中
-        Collection<String> nodes = new HashSet<String>();
+        Collection<String> nodes = new HashSet<>();
         for(int i=0;i<10;i++){
             nodes.add("00"+i);
         }
         // MD5压缩算法实现的hash函数
         HashFunction hashFunction = new HashFunction();
-        ConsistentHash<String> cHash = new ConsistentHash<String>(hashFunction,
-                10, nodes);
-        for(int i=11;i<35;i++){
+        ConsistentHash<String> cHash = new ConsistentHash<>(hashFunction, 4, nodes);
+        for(int i=11;i<90;i++){
             cHash.add("00"+i);
         }
         // 对象的key值为"google_baidu"
