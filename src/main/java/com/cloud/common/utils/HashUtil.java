@@ -1,7 +1,12 @@
 package com.cloud.common.utils;
 
+import com.cloud.common.consistencyhash.ConsistentHash;
+import com.cloud.common.consistencyhash.HashFunction;
+
+import java.util.Collection;
+
 /**
- * 使用Hash算法来实现分表
+ * 使用普通Hash算法或者Hash一致性算法来实现分表
  */
 public class HashUtil {
 
@@ -26,5 +31,17 @@ public class HashUtil {
             throw new Exception("key的数据类型不支持");
         }
         return tablename.concat("00").concat(suffer);
+    }
+
+    /**
+     * 使用Hash一致性算法来进行获取表名
+     * @param nodes
+     * @param key
+     * @return
+     */
+    public static String consistentHashTableName(Collection<String> nodes,Object key){
+        HashFunction hashFunction = new HashFunction();
+        ConsistentHash<String> cHash = new ConsistentHash<>(hashFunction, 4, nodes);
+        return cHash.get(key);
     }
 }
