@@ -1,6 +1,8 @@
 package com.cloud.common.excel;
 
+import com.cloud.common.exception.BusiException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,9 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * poi导入导出工具类
@@ -63,6 +67,35 @@ public class PoiHelper {
             list.add(o);
         }
         return list;
+    }
+
+    /**
+     * 得到cell的值
+     * @param cell
+     * @return
+     */
+    public static <T> T getCellValue(Cell cell, Class<T> cls) throws Exception {
+        if(Objects.isNull(cell)){
+            return null;
+        }
+        String cellValue = "";
+        if(cell.getCellType() == cell.CELL_TYPE_STRING) {
+            cellValue = cell.getRichStringCellValue().getString();
+        }
+        if(cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+            cell.setCellType(cell.CELL_TYPE_STRING);
+            cellValue = String.valueOf(cell.getRichStringCellValue().getString());
+        }
+        if("".equals(cellValue)){
+            return null;
+        }
+        if(cls == String.class){
+            return (T)cellValue;
+        }else if(cls == BigDecimal.class){
+            return (T)BigDecimal.valueOf(Double.valueOf(cellValue));
+        }else{
+            throw new BusiException("解析失败,类型转换不正确");
+        }
     }
 
 }
