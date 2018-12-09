@@ -1,6 +1,8 @@
 package com.cloud.common.simplequery;
 
 import java.io.Serializable;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * 用来生成sql中的in和not in操作的对象
@@ -14,7 +16,15 @@ public class IntervalEntity implements Serializable {
     /**
      * field comment: 在in或者not in中的值
      */
-    private Object list;
+    private SortedSet list;
+
+    public <T> IntervalEntity(String name,T[] list) {
+        this.name = name;
+        this.list = new TreeSet<>();
+        for(int i=0;i<list.length;i++){
+            this.list.add(list[i]);
+        }
+    }
 
     public String getName() {
         return name;
@@ -24,11 +34,11 @@ public class IntervalEntity implements Serializable {
         this.name = name;
     }
 
-    public Object getList() {
+    public SortedSet getList() {
         return list;
     }
 
-    public void setList(Object list) {
+    public void setList(SortedSet list) {
         this.list = list;
     }
 }
