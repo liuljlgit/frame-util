@@ -160,7 +160,7 @@ public class CommonUtil {
     }
 
     /**
-     * 把对象转换成一个redis的key值
+     * 得到一个对象的所有Field域
      * @param clazz
      * @param fields
      * @return
