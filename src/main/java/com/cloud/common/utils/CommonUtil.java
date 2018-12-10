@@ -238,8 +238,6 @@ public class CommonUtil {
 
     /**
      * 关闭输出流代码
-     *
-     * @author shenxufei
      * @param is
      */
     public static void closeInpputStream(InputStream is) {
@@ -251,8 +249,6 @@ public class CommonUtil {
 
     /**
      * 关闭输出流代码
-     *
-     * @author shenxufei
      * @param os
      */
     public static void closeOutputStream(OutputStream os) {
