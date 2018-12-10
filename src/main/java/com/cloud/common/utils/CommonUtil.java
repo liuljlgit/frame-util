@@ -3,15 +3,19 @@ package com.cloud.common.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.beans.PropertyDescriptor;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,8 +24,8 @@ import java.util.stream.Collectors;
  * @author lijun
  */
 public class CommonUtil {
-    private static final Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
+    private static final Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
     /**
      * 复制属性，忽略空值
@@ -281,5 +285,34 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 下载Excel
+     * @param response
+     * @param fileName
+     * @param workbook
+     */
+    private void downloadExcel(HttpServletResponse response, String fileName, Workbook workbook) {
+        ServletOutputStream out = null;
+        try {
+            response.reset();
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/msexcel");
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8") + ".xls");
+            out = response.getOutputStream();
+            workbook.write(out);
+            out.flush();
+        } catch (Exception var27) {
+            logger.error(var27.getMessage(), var27);
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (Exception var26) {
+                logger.error(var26.getMessage(), var26);
+            }
+        }
     }
 }
