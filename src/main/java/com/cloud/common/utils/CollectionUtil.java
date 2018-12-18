@@ -20,7 +20,7 @@ public class CollectionUtil {
         int number = source.size() / n;  //然后是商
         int offset = 0;//偏移量
         for (int i = 0; i < n; i++) {
-            List<T> value = null;
+            List<T> value;
             if (remaider > 0) {
                 value = source.subList(i * number + offset, (i + 1) * number + offset + 1);
                 remaider--;
@@ -103,6 +103,22 @@ public class CollectionUtil {
         list.clear();
         list.addAll(newList);
         return list;
+    }
+
+    /**
+     * 去掉集合中的多个元素
+     * @param collection
+     * @param elesRemoved
+     * @param <T>
+     * @return
+     */
+    public static <T> Collection<T> removeAny(Collection<T> collection, T... elesRemoved) {
+        HashSet<T> set = new HashSet<>();
+        for (T t : elesRemoved) {
+            set.add(t);
+        }
+        collection.removeAll(set);
+        return collection;
     }
 
 }
