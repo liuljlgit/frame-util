@@ -105,88 +105,88 @@ public class Criteria {
 
 
     /*以下为common的sql语句*/
-    public void andColIsNull(String col){
+    public void andTableColIsNull(String col){
         addCriterion("and "+col+" is null");
     }
-    public void orColIsNull(String col){
+    public void orTableColIsNull(String col){
         addCriterion("or "+col+" is null");
     }
-    public void andColIsNotNull(String col){
+    public void andTableColIsNotNull(String col){
         addCriterion("and "+col+" is not null");
     }
-    public void orColIsNotNull(String col){
+    public void orTableColIsNotNull(String col){
         addCriterion("or "+col+" is not null");
     }
-    public void andColEqualTo(String col,Object val){
+    public void andTableColEqualTo(String col,Object val){
         addCriterion("and "+col+" = ",val);
     }
-    public void orColEqualTo(String col,Object val){
+    public void orTableColEqualTo(String col,Object val){
         addCriterion("or "+col+" = ",val);
     }
-    public void andColNotEqualTo(String col,Object val){
+    public void andTableColNotEqualTo(String col,Object val){
         addCriterion("and "+col+" <> ",val);
     }
-    public void orColNotEqualTo(String col,Object val){
+    public void orTableColNotEqualTo(String col,Object val){
         addCriterion("or "+col+" <> ",val);
     }
-    public void andColGreaterThan(String col,Object val){
+    public void andTableColGreaterThan(String col,Object val){
         addCriterion("and "+col+" > ",val);
     }
-    public void orColGreaterThan(String col,Object val){
+    public void orTableColGreaterThan(String col,Object val){
         addCriterion("or "+col+" > ",val);
     }
-    public void andColGreaterThanOrEqualTo(String col,Object val){
+    public void andTableColGreaterThanOrEqualTo(String col,Object val){
         addCriterion("and "+col+" >= ",val);
     }
-    public void orColGreaterThanOrEqualTo(String col,Object val){
+    public void orTableColGreaterThanOrEqualTo(String col,Object val){
         addCriterion("or "+col+" >= ",val);
     }
-    public void andColLessThan(String col,Object val){
+    public void andTableColLessThan(String col,Object val){
         addCriterion("and "+col+" < ",val);
     }
-    public void orColLessThan(String col,Object val){
+    public void orTableColLessThan(String col,Object val){
         addCriterion("or "+col+" < ",val);
     }
-    public void andColLessThanOrEqualTo(String col,Object val){
+    public void andTableColLessThanOrEqualTo(String col,Object val){
         addCriterion("and "+col+" <= ",val);
     }
-    public void orColLessThanOrEqualTo(String col,Object val){
+    public void orTableColLessThanOrEqualTo(String col,Object val){
         addCriterion("or "+col+" <= ",val);
     }
-    public void andColLike(String col,Object val){
+    public void andTableColLike(String col,Object val){
         addCriterion("and "+col+" like ",val);
     }
-    public void orColLike(String col,Object val){
+    public void orTableColLike(String col,Object val){
         addCriterion("or "+col+" like ",val);
     }
-    public void andColNotLike(String col,Object val){
+    public void andTableColNotLike(String col,Object val){
         addCriterion("and "+col+" not like ",val);
     }
-    public void orColNotLike(String col,Object val){
+    public void orTableColNotLike(String col,Object val){
         addCriterion("or "+col+" not like ",val);
     }
-    public void andColIn(String col,Object val){
+    public void andTableColIn(String col,Object val){
         addCriterion("and "+col+" in ",val);
     }
-    public void orColIn(String col,Object val){
+    public void orTableColIn(String col,Object val){
         addCriterion("or "+col+" in ",val);
     }
-    public void andColNotIn(String col,Object val){
+    public void andTableColNotIn(String col,Object val){
         addCriterion("and "+col+" not in ",val);
     }
-    public void orColNotIn(String col,Object val){
+    public void orTableColNotIn(String col,Object val){
         addCriterion("or "+col+" not in ",val);
     }
-    public void andColBetween(String col,Object val1,Object val2){
+    public void andTableColBetween(String col,Object val1,Object val2){
         addCriterion("and "+col+" between ",val1,val2);
     }
-    public void orColBetween(String col,Object val1,Object val2){
+    public void orTableColBetween(String col,Object val1,Object val2){
         addCriterion("or "+col+" between ",val1,val2);
     }
-    public void andColNotBetween(String col,Object val1,Object val2){
+    public void andTableColNotBetween(String col,Object val1,Object val2){
         addCriterion("and "+col+" not between ",val1,val2);
     }
-    public void orColNotBetween(String col,Object val1,Object val2){
+    public void orTableColNotBetween(String col,Object val1,Object val2){
         addCriterion("or "+col+" not between ",val1,val2);
     }
 
