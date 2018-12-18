@@ -1,8 +1,6 @@
 package com.cloud.common.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 集合处理工具类
@@ -74,6 +72,37 @@ public class CollectionUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * list去重（不保证原来的顺序）
+     * @param list
+     * @return
+     */
+    public static <T> List<T> removeRepeatElement(List<T> list) {
+        HashSet<T> h = new HashSet(list);
+        list.clear();
+        list.addAll(h);
+        return list;
+    }
+
+    /**
+     * list去重保证原来的顺序
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> removeDuplicateWithOrder(List<T> list) {
+        Set<T> set = new HashSet();
+        List<T> newList = new ArrayList();
+        for (Iterator<T> iter = list.iterator(); iter.hasNext();) {
+            T element = iter.next();
+            if (set.add(element))
+                newList.add(element);
+        }
+        list.clear();
+        list.addAll(newList);
+        return list;
     }
 
 }
