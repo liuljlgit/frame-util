@@ -55,13 +55,8 @@ public class CollectionUtil {
     }
 
     /**
-     * 从一个两层的map中得到value值
-     * @param firstKey
-     * @param secondKey
-     * @param dataMaps
-     * @param <K1>
-     * @param <K2>
-     * @param <V>
+     * 从一个两层的map中得到唯一的值
+     * V可以是map,则也可以是三层map结构
      * @return
      */
     public static <K1,K2,V> V getTwoKeyMapValue(K1 firstKey,K2 secondKey,Map<K1,Map<K2,V>> dataMaps) {
@@ -72,6 +67,37 @@ public class CollectionUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * 从一个两层的map中得到唯一的值,如果不存在,则新创建
+     * V可以是map,则也可以是三层map结构
+     * @return
+     */
+    public static <K1,K2,V> V getTwoKeyMapValue(K1 firstKey,K2 secondKey,Map<K1,Map<K2,V>> dataMaps,V initValue) {
+        if(dataMaps.containsKey(firstKey)){
+            Map<K2, V> k2VMap = dataMaps.get(firstKey);
+            if(k2VMap.containsKey(secondKey)){
+                return k2VMap.get(secondKey);
+            }
+        }
+        return setTwoKeyMapValue(firstKey,secondKey,dataMaps,initValue);
+    }
+
+    /**
+     * 从一个两层的map中设置值
+     * V可以是map,则也可以是三层map结构
+     * @return
+     */
+    public static <K1,K2,V> V setTwoKeyMapValue(K1 firstKey,K2 secondKey,Map<K1,Map<K2,V>> dataMaps,V value) {
+        if(dataMaps.containsKey(firstKey)){
+            dataMaps.get(firstKey).put(secondKey,value);
+        }else{
+            Map<K2, V> k2VMap = new HashMap<>();
+            k2VMap.put(secondKey,value);
+            dataMaps.put(firstKey,k2VMap);
+        }
+        return value;
     }
 
     /**
