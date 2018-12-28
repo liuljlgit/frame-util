@@ -151,11 +151,10 @@ public class CollectionUtil {
      * 获取(A-B)集合,也就是A集合除去B集合中已存在的对象
      * @param aCollect
      * @param bCollect
-     * @param elesRemoved
      * @param <T>
      * @return
      */
-    public static <T> Collection<T> aSubtractB(Collection<T> aCollect,Collection<T> bCollect, T... elesRemoved) {
+    public static <T> Collection<T> aSubtractB(Collection<T> aCollect,Collection<T> bCollect) {
         Set set = new HashSet();
         Set<T> aSet = new HashSet<>(aCollect);
         Set<T> bSet = new HashSet<>(bCollect);
