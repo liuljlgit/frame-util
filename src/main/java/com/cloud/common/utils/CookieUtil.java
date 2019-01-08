@@ -20,6 +20,9 @@ import java.util.Objects;
  * 2.path表示cookie所在的目录，asp.net默认为/，就是根目录。
  *  在同一个服务器上有目录如下：/test/,/test/cd/,/test/dd/，现设一个cookie1的path为/test/，cookie2的path为/test/cd/，
  *  那么test下的所有页面都可以访问到cookie1，而/test/和/test/dd/的子页面不能访问cookie2。这是因为cookie能让其path路径下的页面访问。
+ *
+ * 3.Cookie中会返回一个JSESSIONID的Cookie,我们请求的时候带上这个JSESSIONID以标识同一个会话（session）,如果没有找到这个session,表示这个session过期了,会默认创建一个新的session。
+ *  默认情况下session应该是存储在内存中，我们也可以使用redis存储session。
  */
 public class CookieUtil {
 
@@ -32,7 +35,7 @@ public class CookieUtil {
      * @param domain 所属域。如果不设置默认是当前域可用
      * @param maxAge 生命周期,以秒为单位
      */
-    public static void addCookie(HttpServletResponse response,String name,String value,String path,String domain,Integer maxAge) throws Exception {
+    public static void addCookie(HttpServletResponse response,String name,String value,String path,String domain,Integer maxAge,Boolean httpOnly,Boolean secure) throws Exception {
         if(Objects.isNull(name) || Objects.isNull(value)){
             throw new Exception("请设置正确的Cookie值");
         }
@@ -52,6 +55,12 @@ public class CookieUtil {
         }
         if(Objects.nonNull(maxAge) && maxAge>0){
             cookie.setMaxAge(maxAge);
+        }
+        if(Objects.nonNull(httpOnly)){
+            cookie.setHttpOnly(secure);
+        }
+        if(Objects.nonNull(secure)){
+            cookie.setSecure(secure);
         }
         response.addCookie(cookie);
     }
