@@ -1,6 +1,7 @@
 package com.cloud.common.exception;
 
-import com.cloud.common.base.BaseController;
+import com.cloud.common.webcomm.CodeEnum;
+import com.cloud.common.webcomm.RespEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,22 +15,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends BaseController {
+public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
-    /**
-     * 业务异常
-     * @param request
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(BusiException.class)
-    @ResponseBody
-    public String busiExcepitonHandler(HttpServletRequest request, BusiException e) {
-        logger.error(e.getMessage(),e);
-        return formatResponseParams(EXEC_ERROR,null,e.getMessage());
-    }
 
     /**
      * 系统异常
@@ -41,7 +29,22 @@ public class GlobalExceptionHandler extends BaseController {
     @ResponseBody
     public String defultExcepitonHandler(HttpServletRequest request, Exception e) {
         logger.error(e.getMessage(),e);
-        return formatResponseParams(EXEC_ERROR,null,"系统繁忙,请稍后重试!");
+        return RespEntity.commonResp(CodeEnum.EXEC_ERROR,null);
+    }
+
+    /**
+     * 业务异常
+     * @param request
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(BusiException.class)
+    @ResponseBody
+    public String busiExcepitonHandler(HttpServletRequest request, BusiException e) {
+        logger.error(e.getMessage(),e);
+        Integer code = e.getCode() == null ? CodeEnum.EXEC_ERROR.getCode() : e.getCode();
+        String msg = e.getMsg() == null ? CodeEnum.EXEC_ERROR.getMsg() : e.getMsg();
+        return RespEntity.commonResp(code,msg,null);
     }
 
 }
