@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
-     * 系统异常
+     * 默认异常
      * @param request
      * @param e
      * @return
@@ -41,9 +41,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusiException.class)
     @ResponseBody
     public String busiExcepitonHandler(HttpServletRequest request, BusiException e) {
-        logger.error(e.getMessage(),e);
         Integer code = e.getCode() == null ? CodeEnum.EXEC_ERROR.getCode() : e.getCode();
         String msg = e.getMsg() == null ? CodeEnum.EXEC_ERROR.getMsg() : e.getMsg();
+        logger.error(msg,e);
         return RespEntity.commonResp(code,msg,null);
     }
 
