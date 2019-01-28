@@ -11,12 +11,10 @@ public class RespEntity {
 	 * @return
 	 */
 	public static String ok(){
-		JSONObject resObject = new JSONObject();
-		JSONObject respHeader = new JSONObject();
-		respHeader.put("code",CodeEnum.EXEC_OK.getCode());
-		respHeader.put("msg",CodeEnum.EXEC_OK.getMsg());
-		resObject.put("respHeader",respHeader);
-		return resObject.toJSONString();
+		JSONObject respObject = new JSONObject();
+		respObject.put("code",CodeEnum.EXEC_OK.getCode());
+		respObject.put("msg",CodeEnum.EXEC_OK.getMsg());
+		return respObject.toJSONString();
 	}
 
 	/**
@@ -25,13 +23,24 @@ public class RespEntity {
 	 * @return
 	 */
 	public static String ok(JSONObject resBody){
-		JSONObject resObject = new JSONObject();
-		JSONObject respHeader = new JSONObject();
-		respHeader.put("code",CodeEnum.EXEC_OK.getCode());
-		respHeader.put("msg",CodeEnum.EXEC_OK.getMsg());
-		resObject.put("respBody",resBody);
-		resObject.put("respHeader",respHeader);
-		return resObject.toJSONString();
+		JSONObject respObject = new JSONObject();
+		respObject.put("code",CodeEnum.EXEC_OK.getCode());
+		respObject.put("msg",CodeEnum.EXEC_OK.getMsg());
+		respObject.put("object",resBody);
+		return respObject.toJSONString();
+	}
+
+	/**
+	 * 有返回体的返回
+	 * @param value
+	 * @return
+	 */
+	public static String ok(Object value){
+		JSONObject respObject = new JSONObject();
+		respObject.put("msg",CodeEnum.EXEC_OK.getMsg());
+		respObject.put("code",CodeEnum.EXEC_OK.getCode());
+		respObject.put("object",value);
+		return respObject.toJSONString();
 	}
 
 	/**
@@ -44,13 +53,11 @@ public class RespEntity {
 		if(Objects.isNull(codeEnum)){
 			codeEnum = CodeEnum.EXEC_OK;
 		}
-		JSONObject resObject = new JSONObject();
-		JSONObject respHeader = new JSONObject();
-		respHeader.put("code",codeEnum.getCode());
-		respHeader.put("msg",codeEnum.getMsg());
-		resObject.put("respBody",resBody);
-		resObject.put("respHeader",respHeader);
-		return resObject.toJSONString();
+		JSONObject respObject = new JSONObject();
+		respObject.put("code",codeEnum.getCode());
+		respObject.put("msg",codeEnum.getMsg());
+		respObject.put("object",resBody);
+		return respObject.toJSONString();
 	}
 
 	/**
@@ -61,13 +68,11 @@ public class RespEntity {
 	 * @return
 	 */
 	public static String commonResp(Integer code,String msg,JSONObject resBody){
-		JSONObject resObject = new JSONObject();
-		JSONObject respHeader = new JSONObject();
-		respHeader.put("code",code);
-		respHeader.put("msg",msg);
-		resObject.put("respBody",resBody);
-		resObject.put("respHeader",respHeader);
-		return resObject.toJSONString();
+		JSONObject respObject = new JSONObject();
+		respObject.put("code",code);
+		respObject.put("msg",msg);
+		respObject.put("object",resBody);
+		return respObject.toJSONString();
 	}
 
 }
