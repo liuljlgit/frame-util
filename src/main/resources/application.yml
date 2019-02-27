@@ -1,0 +1,12 @@
+#端口配置
+server:
+  port: 8184
+
+#打印sql
+debug : true
+logging:
+  level:
+    root: INFO
+    com:
+      gen: debug
+      cloud: debug
